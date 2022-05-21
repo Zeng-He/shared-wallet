@@ -31,15 +31,17 @@ contract Wallet is Whitelisted {
 
     function SetDailyWithdrawalAllowance(uint _amount) public OnlyOwner {
         // update remaining allowance based in the difference of the new amount
-        //dailyWithdrawalRemaining = uint(int(dailyWithdrawalRemaining) + int(_amount - dailyWithdrawalAllowance));
+        dailyWithdrawalRemaining = uint(int(dailyWithdrawalRemaining) + int(_amount - dailyWithdrawalAllowance));
         dailyWithdrawalAllowance = _amount;
     }
 
+    //For testing purpopses
     // yes.. I like to be specific as hell
     function IsMoreThanADayAfterLastWithdrawalAmountReset() public view returns(bool) {
         return (block.timestamp - lastWithdrawalResetTime) > 1 days;
     }
 
+    //For testing purpopses
     function MoveLastWithdrawaResetlToThePast() public {
         lastWithdrawalResetTime = lastWithdrawalResetTime - 1 days;
     }
